@@ -1,0 +1,15 @@
+EnumProcessModules
+FindWindow
+Process32Next
+NetShareEnum
+Module32First
+EnumProcesses
+RegEnumValue
+CreateToolhelp32Snapshot
+EnumWindows
+EnumDesktopWindows
+Module32Next
+NetServerEnum
+RegEnumKey
+FindWindowEx
+Process32First

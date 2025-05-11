@@ -1,0 +1,11 @@
+{
+    "floss_path": "",
+    "capa_path": "",
+    "suspicious_strings_path": "",
+    "virustotal_api_key": "",
+    "abuseipdb_api_key": "",
+    "threatbook_api_key": "",
+    "metadefender_api_key": "",
+    "hybridanalysis_api_key": "",
+    "filescanio_api_key": ""
+}

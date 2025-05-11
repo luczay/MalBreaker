@@ -1,0 +1,747 @@
+
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MalBreaker</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbar-fixed/">
+
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
+<meta name="theme-color" content="#712cf9">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      h3 {
+        text-align: center;
+      }
+
+      td {
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      th {
+        vertical-align: middle;
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+
+      .code-line {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      .address, .mnemonic {
+          width: 30%;
+          text-align: center;
+          white-space: nowrap; /* Prevent breaking the line for address and mnemonic */
+      }
+
+      .operand {
+          flex-grow: 1; /* Allow the operand to take up remaining space */
+          text-align: left; /* Align operands to the left */
+          white-space: nowrap; /* Prevent breaking the operand */
+          overflow: hidden; /* Hide overflow if it exceeds container width */
+          text-overflow: ellipsis; /* Show ellipsis for long operands */
+      }
+
+      #graph {
+        width: 100%;
+        height: 600px;
+        border: 1px solid lightgray;
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="navbar-fixed.css" rel="stylesheet">
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <symbol id="check2" viewBox="0 0 16 16">
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+      </symbol>
+      <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+      </symbol>
+      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+      </symbol>
+      <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+      </symbol>
+    </svg>
+
+    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+              id="bd-theme"
+              type="button"
+              aria-expanded="false"
+              data-bs-toggle="dropdown"
+              aria-label="Toggle theme (auto)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+            Light
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+            Dark
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
+            Auto
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MalBreaker</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mx-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <!-- add "active" class based on whats in view -->
+          <a class="nav-link" aria-current="page" href="#findings">Findings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#static">Static</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#dynamic">Dynamic</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#re">Reverse Engineering</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+  <div id="findings" class="bg-body-tertiary p-5 rounded mb-5">
+    <h1 class="p-2 bg-secondary bg-opacity-10 rounded">Findings</h1>
+    <hr class="my-4">
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">Strings</h2>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">String</th>
+                <th scope="col" class="text-center">VirusTotal</th>
+                <th scope="col" class="text-center">MetaDefender</th>
+                <th scope="col" class="text-center">ThreatBook</th>
+                <th scope="col" class="text-center">AbuseIPDB</th>
+                <th scope="col" class="text-center">Offset</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              {% for item in string_findings %}
+              <tr>
+                <td>{{item.string}}</td>
+                <td>{{item.virustotal}}</td>
+                <td>{{item.metadefender}}</td>
+                <td>{{item.threatbook}}</td>
+                <td>{{item.abuseipdb}}</td>
+                <td>{{item.offset}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">HASH</h2>
+    <hr class="my-2">
+    <h3 class="p-2 bg-secondary bg-opacity-10 rounded">VirusTotal</h3>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <tbody>
+              <tr>
+                <th scope="row">Malicious</th>
+                <td>{{virustotal_hash_result.malicious}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Suspicious</th>
+                <td>{{virustotal_hash_result.suspicious}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Harmless</th>
+                <td>{{virustotal_hash_result.harmless}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    <h3 class="p-2 bg-secondary bg-opacity-10 rounded">MetaDfender</h3>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <tbody>
+              <tr>
+                <th scope="row">Current Result</th>
+                <td>{{metadefender_hash_result.current}}</td>
+              </tr>
+              <tr>
+                <th scope="row">All Results</th>
+                <td>{{metadefender_hash_result.all}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">Packed Sections</h2>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Entropy</th>
+                <th scope="col" class="text-center">Offset</th>
+                <th scope="col" class="text-center">Size</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              {% for section in packed_sections %}
+              <tr>
+                <td>{{section.name}}</td>
+                <td>{{section.entropy}}</td>
+                <td>{{section.offset}}</td>
+                <td>{{section.size}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">Suspicious Windows API Calls</h2>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Type</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              {% for item in sus_winapis %}
+              <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.type}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">Filescan.io</h2>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <tbody>
+              <tr>
+                <th scope="row">Verdict:</th>
+                <td>{{filescanio.verdict}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Threat Level:</th>
+                <!-- maliciousness indicator -->
+                <td>{{filescanio.threat_level}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Confidence:</th>
+                <td>{{filescanio.confidence}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">Hybrid Analysis</h2>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Scanner Name</th>
+                <th scope="col" class="text-center">Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for result in hybridanalysis %}
+              <tr>
+                <td>{{result.name}}</td>
+                <td>{{result.status}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">CAPA</h2>
+    <div id="capa_findings" class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Function</th>
+                <th scope="col" class="text-center">Rule Matches</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              {% for function in capa_functions %}
+              <tr>
+                <td rowspan="{{capa_rule_matches[function]|length}}"><a href="#{{function}}" class="text-reset text-decoration-none">{{function}}</a></td>
+                <td>{{capa_rule_matches[function][0]}}</td>
+              </tr>
+              {% for match in capa_rule_matches[function][1:] %}
+                <tr>
+                  <td>{{match}}</td>
+                </tr>
+              {% endfor %}
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </div>
+
+  <div id="static" class="bg-body-tertiary p-5 rounded mb-5">
+    <h1 class="p-2 bg-secondary bg-opacity-10 rounded">Static</h1>
+    <hr class="my-4">
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">File Info</h2>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <tbody>
+              <tr>
+                <th scope="row">Name</th>
+                <td>{{file_info.name}}</td>
+              </tr>
+              <tr>
+                <th scope="row">HASH (SHA-256):</th>
+                <td>{{file_info.hash}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Size:</th>
+                <td>{{file_info.size}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Architecture:</th>
+                <td>{{file_info.architecture}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Endianness:</th>
+                <td>{{file_info.endianness}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Extension:</th>
+                <td>{{file_info.extension}}</td>
+              </tr>
+              <tr>
+                <th scope="row">File Type:</th>
+                <td>{{file_info.type}}</td>
+              </tr>
+              <tr>
+                <th scope="row">String:</th>
+                <td>{{file_info.string}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Type:</th>
+                <td>{{file_info.type}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">Version Details</h2>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Detail</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              {% for item in version_details %}
+              <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.detail}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">Sections</h2>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Entropy</th>
+                <th scope="col" class="text-center">Offset</th>
+                <th scope="col" class="text-center">Size</th>
+                <th scope="col" class="text-center">Status</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              {% for item in sections %}
+              <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.entropy}}</td>
+                <td>{{item.offset}}</td>
+                <td>{{item.size}}</td>
+                <td>{{item.status}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">Strings</h2>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">String</th>
+                <th scope="col" class="text-center">Type</th> 
+                <th scope="col" class="text-center">Category</th>
+                <th scope="col" class="text-center">Risk Level</th>
+                <th scope="col" class="text-center">Encoding</th>
+                <th scope="col" class="text-center">Offset</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              {% for item in strings %}
+              <tr>
+                <td>{{item.string}}</td>
+                <td>{{item.type}}</td>
+                <td>{{item.category}}</td>
+                <td>{{item.risk_level}}</td>
+                <td>{{item.encoding}}</td>
+                <td>{{item.offset}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">PEFILE</h2>
+    <hr class="my-2">
+    <h3 class="p-2 bg-secondary bg-opacity-10 rounded">Imports</h3>
+    <div class="table-responsive my-4">
+      <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th scope="col" class="text-center">Import Entry</th>
+              <th scope="col" class="text-center">Entry Imports</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            {% for entry in pefile_imports %}
+            <tr>
+                <td class="align-middle" style="width: 30%;"><strong>{{ entry.import_entry }}</strong></td>
+                  
+                <td style="width: 70%;">
+                    <table class="table table-sm table-borderless mb-0">
+                        <tbody>
+                            {% for import_function in entry.entry_imports %}
+                            <tr>
+                                <td>{{ import_function }}</td>
+                             </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+      </table>
+    </div>
+    <h3 class="p-2 bg-secondary bg-opacity-10 rounded">Exports</h3>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Exports</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              {% for item in pefile_exports %}
+              <tr>
+                <td>{{item}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h3 class="p-2 bg-secondary bg-opacity-10 rounded">Resources</h3>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Resources</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              {% for item in pefile_resources %}
+              <tr>
+                <td>{{item}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h3 class="p-2 bg-secondary bg-opacity-10 rounded">TLS Callback</h3>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <tbody>
+              <tr>
+                <th scope="row">TLS Callback:</th>
+                <td>{{pefile_tls_callback}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    <h3 class="p-2 bg-secondary bg-opacity-10 rounded">Signature</h3>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <tbody>
+              <tr>
+                <th scope="row">Signature:</th>
+                <td>{{pefile_signature}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="my-4">
+  </div>
+
+  <div id="dynamic" class="bg-body-tertiary p-5 rounded mb-5">
+    <h1 class="p-2 bg-secondary bg-opacity-10 rounded">Dynamic</h1>
+    <hr class="my-4">
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">Filescan.io</h2>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <tbody>
+              <tr>
+                <th scope="row">Verdict:</th>
+                <td>{{filescanio.verdict}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Threat Level:</th>
+                <!-- maliciousness indicator -->
+                <td>{{filescanio.threat_level}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Confidence:</th>
+                <td>{{filescanio.confidence}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">Hybrid Analysis</h2>
+    <div class="table-responsive my-4">
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">Scanner Name</th>
+                <th scope="col" class="text-center">Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for result in hybridanalysis %}
+              <tr>
+                <td>{{result.name}}</td>
+                <td>{{result.status}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr class="my-4">
+  </div>
+
+  <div id="re" class="bg-body-tertiary p-5 rounded mb-5">
+    <h1 class="p-2 bg-secondary bg-opacity-10 rounded">Reverse Engineering</h1>
+    <hr class="my-4">
+    <h2 class="p-2 bg-secondary bg-opacity-10 rounded">CFG</h2>
+    <!-- <div id="graph" class="my-4"> -->
+      <div class="card mx-auto my-4" style="width: 60%;">
+        <div class="card-body text-center">
+            <p class="card-text">Click the button below to open the CFG.</p>
+            <button type="button" class="btn btn-outline-primary" onClick="window.open('{{svg_location}}');">Open CFG</button>
+        </div>
+    </div>
+    {% for function_address, instructions in capa_reversed_functions.items() %}
+    <div id="{{function_address}}" class="container mt-4 d-flex justify-content-center">
+      <div class="card mx-auto" style="width: 60%;">
+        <div class="card-header text-center">
+          <strong>Function Offset: {{function_address}}</strong>
+          <div>
+              <a href="#capa_findings" class="text-reset text-decoration-none mt-2 d-block">Back</a>
+          </div>
+      </div>
+          <div class="card-body bg-dark text-light p-3 rounded">
+            {% if instructions %}
+              <div class="container">
+                <!-- Table Header -->
+                <div class="row mb-2">
+                  <div class="col text-start border-bottom"><strong>Address</strong></div>
+                  <div class="col text-start border-bottom"><strong>Mnemonic</strong></div>
+                  <div class="col-6 text-start border-bottom"><strong>Operand</strong></div>
+                </div>
+                <!-- Instructions -->
+                {% for instruction in instructions %}
+                <div class="row mb-1">
+                  <div class="col text-start">{{instruction.address}}</div>
+                  <div class="col text-start">{{instruction.mnemonic}}</div>
+                  <div class="col-6 text-start overflow-auto" style="white-space: nowrap;">{{instruction.operand}}</div>                </div>
+                {% endfor %}
+              </div>
+            {% else %}
+            <p>No instructions available for this function.</p>
+            {% endif %}
+          </div>
+      </div>
+    </div>
+{% endfor %}
+    <hr class="my-4">
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js" integrity="sha512-XHDcSyqhOoO2ocB7sKOCJEkUjw/pQCJViP1ynpy+EGh/LggzrP6U/V3a++LQTnZT7sCQKeHRyWHfhN2afjXjCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script type="text/javascript">
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+      { id: 1, label: "Node 1" },
+      { id: 2, label: "Node 2" },
+      { id: 3, label: "Node 3" },
+      { id: 4, label: "Node 4" },
+      { id: 5, label: "Node 5" },
+    ]);
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+      { from: 1, to: 3 },
+      { from: 1, to: 2 },
+      { from: 2, to: 4 },
+      { from: 2, to: 5 },
+      { from: 3, to: 3 },
+    ]);
+
+    // create a network
+    var container = document.getElementById("graph");
+    var data = {
+      nodes: nodes,
+      edges: edges,
+    };
+    var options = {};
+    var network = new vis.Network(container, data, options);
+</script>
+
+</body>
+</html>

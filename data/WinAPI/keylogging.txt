@@ -1,0 +1,8 @@
+GetForegroundWindow
+GetKeyboardState
+GetKeyState
+GetAsyncKeyState
+SetWindowsHookEx
+GetWindowText
+GetKeyNameText
+GetKeyboardLayout

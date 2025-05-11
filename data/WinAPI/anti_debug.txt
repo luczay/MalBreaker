@@ -1,0 +1,8 @@
+CheckRemoteDebuggerPresent
+IsDebuggerPresent
+LookupPrivilegeValue
+BlockInput
+BeingDebuggeed
+NtQueryInformationProcess
+NtGlobalFlag
+OutputDebugString

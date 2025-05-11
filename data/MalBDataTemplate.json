@@ -1,0 +1,45 @@
+{
+    "id": 0,
+    "static": {
+        "file_info": 
+        {
+            "name": "",
+            "hash": "",
+            "size": 0,
+            "architecture": "",
+            "endianness": "",
+            "extension": "",
+            "file_type": "",
+            "string": "",
+            "type": ""
+        },
+        "version_details": [],
+        "sections": [],
+        "strings": {
+            "runtime": {},
+            "decoded_strings": [],
+            "language_strings": [],
+            "language_strings_missed": [],
+            "stack_strings": [],
+            "static_strings": [],
+            "tight_strings": []
+        },
+        "die": [],
+        "pefile": {
+            "imports": [],
+            "exports": [],
+            "resources": [],
+            "tls_callback": "",
+            "signature": ""
+        }
+    },
+    "dynamic": {
+        "scan_results": {
+            "filescanio": {},
+            "hybridanalysis": {}
+        }
+    },
+    "re": {
+        "capa": {}
+    }
+}

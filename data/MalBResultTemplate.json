@@ -1,0 +1,30 @@
+{
+    "id": 0,
+    "static": {
+        "strings": 
+        {
+            "urls": [],
+            "domains": [],
+            "url_paths": [],
+            "ips": [],
+            "suspicious": [],
+            "number_of_strings": "" 
+        },
+        "file": {
+            "hash": {
+                "value": "", 
+                "results": []
+            },
+            "packed_sections": [],
+            "suspicious_winapis": []
+        }
+    },
+    "dynamic": {
+        "filescanio": {},
+        "hybridanalysis": []
+    },
+    "re": {
+        "capa_function_and_matched_rules": {},
+        "capa_reversed_functions": {}
+    }
+}

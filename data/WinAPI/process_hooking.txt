@@ -1,0 +1,6 @@
+SetWindowLongPtr  
+CallNextHookEx  
+UnhookWindowsHookEx  
+SetWindowsHookEx  
+GetWindowLongPtr  
+SetWindowsHookEx  
